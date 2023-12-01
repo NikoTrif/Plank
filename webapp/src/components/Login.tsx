@@ -1,8 +1,9 @@
+import '../styles/login/login.scss';
 
-
+//TD1a
 const Login: React.FC = () => {
     return (
-        <div>
+        <div className='login'>
             <img src={require('../img/login.png')} alt="Login Image" />
             <form>
                 <label htmlFor="email">e-mail</label>

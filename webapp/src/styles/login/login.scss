@@ -1,0 +1,16 @@
+//TD1a
+.login {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    // margin-top: -50px;
+    // margin-left: -50px;
+    width: 100px;
+    height: 200px;
+    img {
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+    }
+}
