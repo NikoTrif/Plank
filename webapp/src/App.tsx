@@ -4,8 +4,7 @@ import Signup from './components/Signup';
 
 const App: React.FC = () => {
     return(
-        // <Login />
-        <Signup />
+        <Login />
     )
 }
 

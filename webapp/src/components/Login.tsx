@@ -15,7 +15,7 @@ const Login: React.FC = () => {
                 <label className='form-label' htmlFor="password">Password</label>
                 <input className='form-control' type="password" name="password" id="password" />
                 <button className='btn btn-success'>Login</button>
-                <a href="#" className='link-primary'>SignUp</a>
+                <a href="/signup" className='link-primary'>SignUp</a>
             </form>
         </div>
     );
