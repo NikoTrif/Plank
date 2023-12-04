@@ -9,11 +9,11 @@ const Login: React.FC = () => {
     return (
         <div className='login'>
             <img src={require('../img/login.png')} alt="Login Image" />
-            <form>
-                <label htmlFor="email" className='form-label'>e-mail</label>
-                <input type="text" name="email" id="email" className='form-control' />
-                <label htmlFor="password" className='form-label'>Password</label>
-                <input type="password" name="password" id="password" className='form-control' />
+            <form className='form'>
+                <label className='form-label' htmlFor="email">e-mail</label>
+                <input className='form-control' type="email" name="email" id="email" />
+                <label className='form-label' htmlFor="password">Password</label>
+                <input className='form-control' type="password" name="password" id="password" />
                 <button className='btn btn-success'>Login</button>
                 <a href="#" className='link-primary'>SignUp</a>
             </form>
