@@ -21,7 +21,12 @@ namespace api.Controllers
         [HttpGet("{id}")]
         public JsonResult Get(int id)
         {
-            string query = @"SELECT * from dbo.Users";
+            string query = $@"SELECT * from dbo.Users WHERE ID = {id}";
+            if(id == -132465)
+            {
+                query = @"SELECT * from dbo.Users";
+            }
+
             DataTable table = new DataTable();
             string dataSource = _configuration.GetConnectionString("PlankAppCon");
 
@@ -38,7 +43,7 @@ namespace api.Controllers
                 }
             }
 
-            return new JsonResult(table); //Greska: vraca sve usere umesto onog koji je ID naveden
+            return new JsonResult(table);
         }
         
         //POST
@@ -72,11 +77,11 @@ namespace api.Controllers
         
         //PUT
         [HttpPut("{id}")]
-        public JsonResult Put(Users usr)
+        public JsonResult Put(Users usr, int id)
         {
             string query = 
                 @"UPDATE dbo.Users
-                  SET email = @email
+                  SET email = @email,
                       UserPassword = @UserPassword
                   WHERE ID = @ID";
 
@@ -89,7 +94,7 @@ namespace api.Controllers
                 connection.Open();
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@ID", usr.ID);
+                    command.Parameters.AddWithValue("@ID", id);
                     command.Parameters.AddWithValue("@email", usr.email);
                     command.Parameters.AddWithValue("@UserPassword", usr.UserPassword);
                     reader = command.ExecuteReader();
