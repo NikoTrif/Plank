@@ -48,7 +48,7 @@ class SignUp extends Component<IProps, IState> {
         // const {email, password, conformedPassword}: any = this.state; //type any resiti
 
         if (this.state.password !== this.state.conformedPassword) {
-            alert('Error. Password is not matching!');
+            alert('Error: Password is not matching!');
             return;
         }
 
