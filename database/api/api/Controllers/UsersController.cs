@@ -18,14 +18,17 @@ namespace api.Controllers
         }
 
         //GET
-        [HttpGet("{id}")]
-        public JsonResult Get(int id)
+        [HttpGet/*("{email, password}")*/]
+        //[HttpGet("{id}")]
+        public JsonResult Get(string email, string UserPassword /*int id*/)
         {
-            string query = $@"SELECT * from dbo.Users WHERE ID = {id}";
-            if(id == -132465)
-            {
-                query = @"SELECT * from dbo.Users";
-            }
+            //string query = $@"SELECT * from dbo.Users WHERE ID = {id}";
+            string query = $@"SELECT * from Users WHERE Users.email = '{email}' AND Users.UserPassword = '{UserPassword}'";
+
+            //if (id == -132465)
+            //{
+            //    query = @"SELECT * from dbo.Users";
+            //}
 
             DataTable table = new DataTable();
             string dataSource = _configuration.GetConnectionString("PlankAppCon");
