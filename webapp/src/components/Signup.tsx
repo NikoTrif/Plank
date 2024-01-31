@@ -52,6 +52,18 @@ class SignUp extends Component<IProps, IState> {
             return;
         }
 
+        if(this.state.password === "" || this.state.conformedPassword === ""){
+            alert("Error: Password can't be empty");
+            return;
+        }
+        
+        if(!this.state.email.includes('@')
+         || this.state.email.indexOf('@') === 0
+         || this.state.email.indexOf('@') === this.state.email.length - 1){
+            alert('Error: e-mail is not right');
+            return;
+        }
+
         fetch(variables.API_URL + 'Users', {
             method: 'POST',
             headers: {
