@@ -53,7 +53,7 @@ class SignUp extends Component<IProps, IState> {
         }
 
         fetch(variables.API_URL + 'Users', {
-            method: 'PUT',
+            method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -76,7 +76,7 @@ class SignUp extends Component<IProps, IState> {
                     <input className="form-control" type="password" name="password" id="password" onChange={(e) => this.passwordOnChange(e)} />
                     <label className="form-label" htmlFor="conform-password">Conform password</label>
                     <input className="form-control" type="password" name="conform-password" id="conform-password" onChange={(e) => this.conformedPasswordOnChange(e)} />
-                    <button className="btn btn-success" type="button" onClick={this.signUp}>Sign Up</button>
+                    <button className="btn btn-success" type="button" onClick={() => this.signUp()}>Sign Up</button>
                 </form>
             </div>
         );
