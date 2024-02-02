@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using System.Data.SqlClient;
+using System.Runtime.InteropServices;
 
 namespace api.Controllers
 {
@@ -18,31 +19,46 @@ namespace api.Controllers
         }
 
         //GET
-        [HttpGet/*("{email, password}")*/]
-        //[HttpGet("{id}")]
-        public JsonResult Get(string email, string UserPassword /*int id*/)
+        //[HttpGet/*("{email, password}")*/]
+        [HttpGet("{id?}")]
+        public JsonResult Get(string email, string UserPassword, int id = 0)
         {
             //string query = $@"SELECT * from dbo.Users WHERE ID = {id}";
-            string query = $@"SELECT * from Users WHERE Users.email = '{email}' AND Users.UserPassword = '{UserPassword}'";
+            string query = "";
 
-            //if (id == -132465)
-            //{
-            //    query = @"SELECT * from dbo.Users";
-            //}
+            if (id == 0)
+            {
+                query = $@"SELECT * from Users WHERE Users.email = '{email}' AND Users.UserPassword = '{UserPassword}'";
+            }
+            else if (id == -132465)
+            {
+                query = @"SELECT * from dbo.Users";
+            }
+            else
+            {
+                query = $@"SELECT * FROM dbo.Users WHERE ID = {id}";
+            }
 
             DataTable table = new DataTable();
             string dataSource = _configuration.GetConnectionString("PlankAppCon");
 
             SqlDataReader reader;
-            using(SqlConnection connection = new SqlConnection(dataSource))
+            using (SqlConnection connection = new SqlConnection(dataSource))
             {
                 connection.Open();
-                using (SqlCommand command = new SqlCommand(query, connection))
+                if (query != "")
                 {
-                    reader = command.ExecuteReader();
-                    table.Load(reader);
-                    reader.Close();
-                    connection.Close();
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        reader = command.ExecuteReader();
+                        table.Load(reader);
+                        reader.Close();
+                        connection.Close();
+                    } 
+                }
+                else
+                {
+                    return new JsonResult("Error: Unautorized!");
                 }
             }
 
