@@ -6,6 +6,9 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import { Component, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { variables } from '../Variables';
+import axios from 'axios';
+import { log } from 'console';
+import MainPage from './calendar/MainPage';
 
 interface IProps {
 
@@ -34,44 +37,51 @@ class Login extends Component<IProps, IState> {
     }
 
     emailOnChange(e: E) {
-        this.setState({email: e.target.value});
+        this.setState({ email: e.target.value });
     }
 
     passwordOnChange(e: E) {
-        this.setState({password: e.target.value});
+        this.setState({ password: e.target.value });
     }
 
-    login() {
-        const {email, password} = this.state;
+    async login(e: any) {
+        e.preventDefault();
 
-        if(email === ""){
+        if (this.state.email === "") {
             alert("Error: Enter e-mail address");
             return;
         }
 
-        if(email.indexOf('@') === -1
-        ||email.indexOf('@') === 0
-        ||email.indexOf('@') === email.length -1){
+        if (this.state.email.indexOf('@') === -1
+            || this.state.email.indexOf('@') === 0
+            || this.state.email.indexOf('@') === this.state.email.length - 1) {
             alert('Error: e-mail is not right');
             return;
         }
 
-        if(password === ""){
+        if (this.state.password === "") {
             alert('Error: Enter password');
             return;
         }
 
-        fetch(variables.API_URL + 'Users', {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                email: email,
-                password: password
-            })
-        }).then(res => res.json()).then(result => alert(result), (error) => {alert('Failed')});
+        const response = await axios({
+            method: 'get',
+            url: `${variables.API_URL}Users`,
+            params: {
+                email: this.state.email,
+                UserPassword: this.state.password
+            }
+        });
+
+        const {data} = response;
+        console.log(data);
+
+        // Continues to /main
+        if (data?.email === this.state.email && data?.UserPassword === this.state.password) {
+            window.location.href = '/main'
+        } else {
+            alert("User doesn't exist");
+        }
     }
 
     render(): ReactNode {
@@ -82,9 +92,9 @@ class Login extends Component<IProps, IState> {
                     <label className='form-label' htmlFor="email">e-mail</label>
                     <input className='form-control' type="email" name="email" id="email" onChange={(e) => this.emailOnChange(e)} />
                     <label className='form-label' htmlFor="password">Password</label>
-                    <input className='form-control' type="password" name="password" id="password" onChange={(e) => this.passwordOnChange(e)}/>
-                    <button className='btn btn-success'>Login</button>
-                    <Link className='link-primary' to={'/signup'} onSubmit={() => this.login()}>Sign Up</Link>
+                    <input className='form-control' type="password" name="password" id="password" onChange={(e) => this.passwordOnChange(e)} />
+                    <Link className='login-button btn btn-success' onClick={(e) => this.login(e)} to='/main'>Login</Link>
+                    <Link className='signlink link-primary' to={'/signup'}>Sign Up</Link>
                 </form>
             </div>
         );
