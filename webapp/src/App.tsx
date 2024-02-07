@@ -13,7 +13,7 @@ const App: React.FC = () => (
             {/* <Route path='/' element={<Login />} /> */}
             <Route path='/' element={<Login />} />
             <Route path='signup' element={<Signup />} />
-            <Route path='main' element={<MainPage />} />
+            <Route path='plank' element={<MainPage />} />
         </Routes>
     </BrowserRouter>
 );

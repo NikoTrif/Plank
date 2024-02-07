@@ -7,8 +7,6 @@ import { Component, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { variables } from '../Variables';
 import axios from 'axios';
-import { log } from 'console';
-import MainPage from './calendar/MainPage';
 
 interface IProps {
 
@@ -64,23 +62,27 @@ class Login extends Component<IProps, IState> {
             return;
         }
 
-        const response = await axios({
-            method: 'get',
-            url: `${variables.API_URL}Users`,
-            params: {
-                email: this.state.email,
-                UserPassword: this.state.password
+        try {
+            const response = await axios({
+                method: 'get',
+                url: `${variables.API_URL}Users`,
+                params: {
+                    email: this.state.email,
+                    UserPassword: this.state.password
+                }
+            });
+    
+            const {data} = response;
+            console.log(data);
+    
+            // Continues to /main
+            if (data?.length === 1 && data[0]?.email === this.state.email && data[0]?.UserPassword === this.state.password) {
+                window.location.href = `/plank?id=${data[0].id}`
+            } else {
+                alert("User doesn't exist");
             }
-        });
-
-        const {data} = response;
-        console.log(data);
-
-        // Continues to /main
-        if (data?.email === this.state.email && data?.UserPassword === this.state.password) {
-            window.location.href = '/main'
-        } else {
-            alert("User doesn't exist");
+        } catch (error) {
+            console.log(error);;
         }
     }
 
