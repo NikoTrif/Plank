@@ -8,9 +8,9 @@ import { UserApi } from "./api";
 
 export interface UserState {
         id: string | undefined,
-        userError: string | undefined | unknown,
+        //userError: string | undefined | unknown,
         loading: boolean | undefined,
-        connectionError: string | undefined | unknown
+        error: string | undefined | unknown
 }
 
 export interface PayloadUserByLogin {
@@ -37,32 +37,36 @@ export const fetctUserByLogin = createAsyncThunk(
 // Slices
 const UserSlice = createSlice({
     name: "user",
-    initialState: {id: undefined, loading: false, userError: undefined, connectionError: undefined} as UserState,
+    initialState: {id: undefined, loading: false, error: undefined} as UserState,
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(fetctUserByLogin.rejected, (state, action) => {
             state.loading = false as boolean;
-            state.connectionError = action?.payload;
+            state.id = undefined;
+            state.error = action?.payload;
             return state;
         });
         builder.addCase(fetctUserByLogin.pending, (state) => {
             state.loading = true as boolean;
+            state.id = undefined;
+            state.error = undefined;
             return state;
         });
         builder.addCase(fetctUserByLogin.fulfilled, (state, action) => {
             state.loading = false as boolean;
+            state.id = undefined;
             if (action?.payload.length > 1) {
-                state.userError = "ERROR: User error" as string;
+                state.error = "ERROR: User error" as string;
                 return state;
             } else if(action?.payload.length < 1) {
-                state.userError = "ERROR: User doesn't exist" as string;
+                state.error = "ERROR: User doesn't exist" as string;
                 return state;
             }
 
             try {
                 state.id = action?.payload[0].id as string;
             } catch (error) {
-                state.userError = error;
+                state.error = error;
             }
             return state;
         });
