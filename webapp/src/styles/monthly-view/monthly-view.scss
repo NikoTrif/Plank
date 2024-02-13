@@ -1,0 +1,19 @@
+.row-cols-7 {
+    .col {
+        flex: 0 0 auto;
+        width: 14.285%;
+    }
+}
+
+.calendar {
+    height: 100%;
+    .day {
+        height: auto;
+        border: 1px solid black;
+    }
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+}

@@ -1,15 +1,16 @@
 import { MonthlyDayTask } from '../../../allComponents'
+import 'bootstrap';
 
 type Props = {
-  day?: number
+  day: string
 }
 
-const MonthlyDay: React.FC = (props: Props) => {
+const MonthlyDay = (props: Props) => {
   return (
     <div>
         <p>{props.day}</p>
         <div>
-          <MonthlyDayTask />
+          <MonthlyDayTask taskName='Nema taska' />
         </div>
     </div>
   )

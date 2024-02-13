@@ -4,7 +4,7 @@ type Props = {
     taskName?: string
 }
 
-const MonthlyDayTask: React.FC = (props: Props) => {
+const MonthlyDayTask = (props: Props) => {
   return (
     <div>{props.taskName}</div>
   )
