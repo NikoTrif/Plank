@@ -1,9 +1,41 @@
+// CSS
+import '../styles/plank/plank.scss';
 // Bootstrap
 import 'bootstrap';
 import { Container, NavDropdown, Navbar } from 'react-bootstrap';
 // Ostalo
+import { useState } from 'react';
+import { MonthlyView, WeaklyView, DailyView } from '../allComponents';
 
-const Plank = () => {
+//Types and interfaces
+type IView = 30 | 7 | 1;
+
+const Plank: React.FC = () => {
+    const [View, setView] = useState(30 as IView);
+
+    const view = () => {
+        switch (View) {
+            case 30:
+                return <MonthlyView />
+            case 7:
+                return <WeaklyView />
+            case 1:
+                return <DailyView />
+        }
+    }
+
+    const periodClick = (period: IView) => {
+        setView(period);
+    }
+
+    // const logoutClick = () => {
+    //     // Before this, state.user.id and state.user.logedin (when made) should be reset
+    //     window.location.href='/login';
+    // }
+
+    // const settingsClick = () => {
+    //     window.location.href = '/settings';
+    // }
 
     return (
         <Container>
@@ -11,14 +43,25 @@ const Plank = () => {
             <Navbar fixed='top' expand='lg' className='bg-body-tertiary'>
                 <Container>
                     <Navbar.Brand href='/'>Plank</Navbar.Brand>
-                    <NavDropdown title='Dropdown' id='plank-nanvropdown'>
+                    <NavDropdown title='User' id='plank-nanvropdown'>
                         <NavDropdown.Item href='#'>Dark Mode</NavDropdown.Item>
-                        <NavDropdown.Item href='#'>User Settings</NavDropdown.Item>
+                        <NavDropdown.Item href='settings'>User Settings</NavDropdown.Item>
                         <NavDropdown.Divider />
-                        <NavDropdown.Item href='#'>Log Out</NavDropdown.Item>
+                        <NavDropdown.Item href='login'>Log Out</NavDropdown.Item>
                     </NavDropdown>
                 </Container>
             </Navbar>
+
+            <div className='view-buttons'>
+                <button onClick={() => periodClick(1)}>Daily View</button>
+                <button onClick={() => periodClick(7)}>Weakly View</button>
+                <button onClick={() => periodClick(30)}>Monthly View</button>
+            </div>
+
+            <div className='view'>
+                {view()}
+            </div>
+
         </Container>
 
     );

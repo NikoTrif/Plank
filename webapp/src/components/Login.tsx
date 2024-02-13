@@ -21,7 +21,7 @@ interface E {
 }
 
 //TD1a
-function Login() {
+const Login: React.FC =  () => {
     const state = useSelector(state => state) as IUserState;
     const dispatch = useDispatch<AppDispatch>();
     const { user } = state as IUserState;

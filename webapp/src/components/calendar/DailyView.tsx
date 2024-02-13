@@ -1,6 +1,9 @@
 const DailyView: React.FC = () => {
+
     return ( 
-        <h2>Daily View</h2>
+        <div>
+            <h2>Daily View</h2>
+        </div>
      );
 }
 

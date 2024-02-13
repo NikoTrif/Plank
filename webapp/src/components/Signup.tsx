@@ -22,7 +22,7 @@ interface E {
 
 
 //TD2a
-class SignUp extends Component<IProps, IState> {
+class Signup extends Component<IProps, IState> {
     constructor(props: IProps) {
         super(props);
 
@@ -95,4 +95,4 @@ class SignUp extends Component<IProps, IState> {
     }
 }
 
-export default SignUp;
+export default Signup;
