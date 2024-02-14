@@ -1,12 +1,16 @@
 nav{
-    display: block;
+    padding: 10px !important;
+
+    .navbar-brand{
+        color: #fff;
+    }
 }
 
 .view-buttons {
     display: flex;
-    // position: relative;
+    // position: absolute;
     // top: 70px;
-    margin-top: 70px;
+    margin-top: 80px;
     width: 100%;
     justify-content: center;
 

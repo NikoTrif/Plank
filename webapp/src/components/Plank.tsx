@@ -2,6 +2,7 @@
 import '../styles/plank/plank.scss';
 // Bootstrap
 import 'bootstrap';
+import '../styles/bootstrap-darkly.css';
 import { Container, NavDropdown, Navbar } from 'react-bootstrap';
 // Ostalo
 import { useState } from 'react';
@@ -40,7 +41,7 @@ const Plank: React.FC = () => {
     return (
         <Container>
             {/**Navbar */}
-            <Navbar fixed='top' expand='lg' className='bg-body-tertiary'>
+            <Navbar fixed='top' expand='lg' className='bg-dark'>
                 <Container>
                     <Navbar.Brand href='/'>Plank</Navbar.Brand>
                     <NavDropdown title='User' id='plank-nanvropdown'>
@@ -53,9 +54,9 @@ const Plank: React.FC = () => {
             </Navbar>
 
             <div className='view-buttons'>
-                <button onClick={() => periodClick(1)}>Daily View</button>
-                <button onClick={() => periodClick(7)}>Weakly View</button>
-                <button onClick={() => periodClick(30)}>Monthly View</button>
+                <button onClick={() => periodClick(1)} className='btn btn-primary'>Daily View</button>
+                <button onClick={() => periodClick(7)} className='btn btn-primary'>Weakly View</button>
+                <button onClick={() => periodClick(30)} className='btn btn-primary'>Monthly View</button>
             </div>
 
             <div className='view'>

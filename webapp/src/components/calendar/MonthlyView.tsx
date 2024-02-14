@@ -6,6 +6,7 @@ import { ArrowLeft, ArrowRight } from 'react-bootstrap-icons';
 // CSS
 import 'bootstrap';
 import '../../styles/monthly-view/monthly-view.scss';
+import '../../styles/bootstrap-darkly.css';
 
 const MonthlyView: React.FC = () => {
 
@@ -57,17 +58,17 @@ const MonthlyView: React.FC = () => {
         <div className='month'>
             <h2 className='text-center'>{format(currentDate, 'MMMM yyyy')}</h2>
             <div className='nav-btns'>
-                <button onClick={btnBckClick} className='arrow'><ArrowLeft /></button>
-                <button onClick={btnTodayClick}>{"Today"}</button>
-                <button onClick={btnFwdClick} className='arrow'><ArrowRight /></button>
+                <button onClick={btnBckClick} className='arrow btn btn-primary'><ArrowLeft /></button>
+                <button onClick={btnTodayClick} className='btn btn-primary'>{"Today"}</button>
+                <button onClick={btnFwdClick} className='arrow btn btn-primary'><ArrowRight /></button>
             </div>
-            <div className='row row-cols-7 calendar'>
+            <div className='row row-cols-7'>
                 {weekDays.map((day, index) => <div className='col text-center weekDays' key={index + 100}>{day}</div>
                 )}
                 {calendarDates().map((day, index) => {
                     return (
-                        <button className='col day' key={index}>
-                            <MonthlyDay day={format(day, 'd').toString()} outsideCurrentMonth={currentDate.getMonth() !== day.getMonth() ? true : false} />
+                        <button className={currentDate.getMonth() !== day.getMonth() ? 'col btn btn-outline-secondary' : 'col btn btn-outline-light'} key={index}> {/**col day */}
+                            <MonthlyDay day={format(day, 'd').toString()} />
                         </button>
                     );
                 })} {/* potrebno dodati onClick funkciju koja otvara dailyView na taj dan */}

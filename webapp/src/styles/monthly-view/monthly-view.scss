@@ -9,8 +9,6 @@
             border-radius: 10%;
             vertical-align: middle;
             line-height: 0%;
-            background-color: transparent;
-            border: 1px solid black;
         }
 
         .arrow {
@@ -28,22 +26,7 @@
         }
 
         .weekDays {
-            border: 1px solid black;
+            border: 1px solid white;
         }
-    }
-
-    .calendar {
-        height: 100%;
-        .day {
-            height: auto;
-            border: 1px solid black;
-            background-color: transparent;
-            border-radius: 5%;
-        }
-    }
-
-    .outsideMonth{
-        color: #353535fb;
-
     }
 }

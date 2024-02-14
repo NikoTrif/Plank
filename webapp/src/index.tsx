@@ -1,6 +1,8 @@
 import { createRoot } from 'react-dom/client';
+// Components
 import App from './App';
-import './styles/main.scss';
+// CSS
+import './styles/bootstrap-darkly.css';
 
 //Redux
 import { store } from './store';
