@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { startOfMonth, endOfMonth, format, addDays, subDays, eachDayOfInterval, addMonths, subMonths } from 'date-fns';
 // Components
 import { MonthlyDay } from '../../allComponents';
@@ -14,7 +13,7 @@ const MonthlyView: React.FC = () => {
     const [currentDate, setCureentDate] = useState(new Date);
     const today = new Date();
     const weekDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-    
+
     const btnBckClick = () => {
         setCureentDate(subMonths(startOfMonth(currentDate), 1));
     }
@@ -65,7 +64,13 @@ const MonthlyView: React.FC = () => {
             <div className='row row-cols-7 calendar'>
                 {weekDays.map((day, index) => <div className='col text-center weekDays' key={index + 100}>{day}</div>
                 )}
-                {calendarDates().map((day, index) => <button className='col day' key={index}><MonthlyDay day={format(day, 'd').toString()} /></button>)} {/* potrebno dodati onClick funkciju koja otvara dailyView na taj dan */}
+                {calendarDates().map((day, index) => {
+                    return (
+                        <button className='col day' key={index}>
+                            <MonthlyDay day={format(day, 'd').toString()} outsideCurrentMonth={currentDate.getMonth() !== day.getMonth() ? true : false} />
+                        </button>
+                    );
+                })} {/* potrebno dodati onClick funkciju koja otvara dailyView na taj dan */}
             </div>
         </div>
     );
