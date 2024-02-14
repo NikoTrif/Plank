@@ -22,6 +22,7 @@ create table Tasks (
 	TaskDate datetime not null,
 	DueDate datetime,
 	Note nvarchar(MAX),
+	TaskPriority int,
 	FOREIGN KEY (UserID) REFERENCES Users(ID),
 	FOREIGN KEY (ScheduleID) REFERENCES Schedule(ID),
 	FOREIGN KEY (ParentID) REFERENCES Tasks(ID)
