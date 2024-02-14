@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import { startOfMonth, endOfMonth, format, addDays, subDays, eachDayOfInterval, addMonths, subMonths } from 'date-fns';
 // Components
 import { MonthlyDay } from '../../allComponents';
+import { ArrowLeft, ArrowRight } from 'react-bootstrap-icons';
 // CSS
 import 'bootstrap';
 import '../../styles/monthly-view/monthly-view.scss';
-import { Button } from 'react-bootstrap';
 
 const MonthlyView: React.FC = () => {
 
@@ -55,17 +55,17 @@ const MonthlyView: React.FC = () => {
     }
 
     return (
-        <div>
+        <div className='month'>
             <h2 className='text-center'>{format(currentDate, 'MMMM yyyy')}</h2>
-            <div className='buttons'>
-                <button onClick={btnBckClick}>{"<"}</button>
+            <div className='nav-btns'>
+                <button onClick={btnBckClick} className='arrow'><ArrowLeft /></button>
                 <button onClick={btnTodayClick}>{"Today"}</button>
-                <button onClick={btnFwdClick}>{">"}</button>
+                <button onClick={btnFwdClick} className='arrow'><ArrowRight /></button>
             </div>
             <div className='row row-cols-7 calendar'>
-                {weekDays.map((day, index) => <div className='col text-center' key={index + 100}>{day}</div>
+                {weekDays.map((day, index) => <div className='col text-center weekDays' key={index + 100}>{day}</div>
                 )}
-                {calendarDates().map((day, index) => <button className='col day'key={index}><MonthlyDay day={format(day, 'd').toString()} /></button>)} {/* potrebno dodati onClick funkciju koja otvara dailyView na taj dan */}
+                {calendarDates().map((day, index) => <button className='col day' key={index}><MonthlyDay day={format(day, 'd').toString()} /></button>)} {/* potrebno dodati onClick funkciju koja otvara dailyView na taj dan */}
             </div>
         </div>
     );
