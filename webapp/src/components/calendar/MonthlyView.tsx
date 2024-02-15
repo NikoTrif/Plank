@@ -6,7 +6,6 @@ import { ArrowLeft, ArrowRight } from 'react-bootstrap-icons';
 // CSS
 import 'bootstrap';
 import '../../styles/monthly-view/monthly-view.scss';
-import '../../styles/bootstrap-darkly.css';
 
 const MonthlyView: React.FC = () => {
 
@@ -67,7 +66,7 @@ const MonthlyView: React.FC = () => {
                 )}
                 {calendarDates().map((day, index) => {
                     return (
-                        <button className={currentDate.getMonth() !== day.getMonth() ? 'col btn btn-outline-secondary' : 'col btn btn-outline-light'} key={index}> {/**col day */}
+                        <button className={currentDate.getMonth() !== day.getMonth() ? 'col btn btn-outline-secondary' : 'col btn btn-outline-primary'} key={index}> {/**col day */}
                             <MonthlyDay day={format(day, 'd').toString()} />
                         </button>
                     );

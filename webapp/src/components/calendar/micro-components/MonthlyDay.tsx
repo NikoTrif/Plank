@@ -1,6 +1,5 @@
 import { MonthlyDayTask } from '../../../allComponents'
 import 'bootstrap';
-import '../../../styles/bootstrap-darkly.css';
 
 type Props = {
   day: string

@@ -2,7 +2,6 @@
 import '../styles/plank/plank.scss';
 // Bootstrap
 import 'bootstrap';
-import '../styles/bootstrap-darkly.css';
 import { Container, NavDropdown, Navbar } from 'react-bootstrap';
 // Ostalo
 import { useState } from 'react';
