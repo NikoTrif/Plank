@@ -10,7 +10,7 @@ import Themes from './Themes';
 
 createRoot(document.getElementById('root') as HTMLElement).render(
     <Provider store={store}>
-        <Themes theme={'dark'}>
+        <Themes>
             <App />
         </Themes>
     </Provider>

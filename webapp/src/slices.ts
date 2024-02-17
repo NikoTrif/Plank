@@ -1,16 +1,17 @@
 import {
+    PayloadAction,
     combineReducers,
     createAsyncThunk,
     createSlice,
 } from "@reduxjs/toolkit";
-import type { PayloadAction, UnknownAction } from "@reduxjs/toolkit";
 import { UserApi } from "./api";
+import { Type } from "react-bootstrap-icons";
 
 export interface UserState {
-        id: string | undefined,
-        //userError: string | undefined | unknown,
-        loading: boolean | undefined,
-        error: string | undefined | unknown
+    id: string | undefined;
+    //userError: string | undefined | unknown,
+    loading: boolean | undefined;
+    error: string | undefined | unknown;
 }
 
 export interface PayloadUserByLogin {
@@ -18,10 +19,14 @@ export interface PayloadUserByLogin {
     password: string;
 }
 
+export interface IDarkMode {
+    darkMode: boolean
+}
+
 // Actions
 export const fetctUserByLogin = createAsyncThunk(
     "user/fetchUserByLogin",
-    async (payload: PayloadUserByLogin[], {rejectWithValue}) => {
+    async (payload: PayloadUserByLogin[], { rejectWithValue }) => {
         try {
             const response = await new UserApi(
                 payload[0].email,
@@ -37,7 +42,11 @@ export const fetctUserByLogin = createAsyncThunk(
 // Slices
 const UserSlice = createSlice({
     name: "user",
-    initialState: {id: undefined, loading: false, error: undefined} as UserState,
+    initialState: {
+        id: undefined,
+        loading: false,
+        error: undefined,
+    } as UserState,
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(fetctUserByLogin.rejected, (state, action) => {
@@ -58,7 +67,7 @@ const UserSlice = createSlice({
             if (action?.payload.length > 1) {
                 state.error = "ERROR: User error" as string;
                 return state;
-            } else if(action?.payload.length < 1) {
+            } else if (action?.payload.length < 1) {
                 state.error = "ERROR: User doesn't exist" as string;
                 return state;
             }
@@ -73,10 +82,27 @@ const UserSlice = createSlice({
     },
 });
 
+export const DarkModeSlice = createSlice({
+    name: "darkMode",
+    initialState: false,
+    reducers: {
+        darkModeToggle: (state) => {
+            state = !state;
+            return state;
+        },
+    },
+});
+
+
 // Combine Reducers
 const rootReducer = combineReducers({
     user: UserSlice.reducer,
+    darkMode: DarkModeSlice.reducer,
 });
 
 // Exports
+// Actions
+export const { darkModeToggle } = DarkModeSlice.actions;
+
+// Reducer
 export default rootReducer;

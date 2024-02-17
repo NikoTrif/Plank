@@ -2,16 +2,23 @@
 import '../styles/plank/plank.scss';
 // Bootstrap
 import 'bootstrap';
-import { Container, NavDropdown, Navbar } from 'react-bootstrap';
+import { Container, FormCheck, NavDropdown, Navbar } from 'react-bootstrap';
 // Ostalo
 import { useState } from 'react';
 import { MonthlyView, WeaklyView, DailyView } from '../allComponents';
+import { useDispatch, useSelector } from 'react-redux';
+import { darkModeToggle, IDarkMode } from '../slices'
 
 //Types and interfaces
 type IView = 30 | 7 | 1;
 
+
+
 const Plank: React.FC = () => {
+    const state = useSelector(state => state);
+    const dispatch = useDispatch();
     const [View, setView] = useState(30 as IView);
+    const { darkMode } = state as IDarkMode;
 
     const view = () => {
         switch (View) {
@@ -44,7 +51,7 @@ const Plank: React.FC = () => {
                 <Container>
                     <Navbar.Brand href='/'>Plank</Navbar.Brand>
                     <NavDropdown title='User' id='plank-nanvropdown'>
-                        <NavDropdown.Item href='#'>Dark Mode</NavDropdown.Item>
+                        <FormCheck type='switch' id='custom-switch' label='Dark Mode' checked={darkMode} onChange={() => dispatch(darkModeToggle())} />
                         <NavDropdown.Item href='settings'>User Settings</NavDropdown.Item>
                         <NavDropdown.Divider />
                         <NavDropdown.Item href='login'>Log Out</NavDropdown.Item>
