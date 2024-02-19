@@ -1,8 +1,7 @@
 import { useSelector } from "react-redux"
 import { IDarkMode } from "./slices";
 import { ReactElement, useEffect } from "react";
-import Cyborg from "./styles/themes/Cyborg";
-import Flatly from "./styles/themes/Flatly";
+import { Cyborg, Flatly } from './allComponents';
 
 // CSS
 
