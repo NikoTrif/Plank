@@ -5,7 +5,7 @@ import 'bootstrap';
 import { Container, FormCheck, NavDropdown, Navbar } from 'react-bootstrap';
 // Ostalo
 import { useState } from 'react';
-import { MonthlyView, WeaklyView, DailyView } from '../allComponents';
+import { MonthlyView, WeeklyView, DailyView } from '../allComponents';
 import { useDispatch, useSelector } from 'react-redux';
 import { darkModeToggle, IDarkMode } from '../slices'
 
@@ -23,7 +23,7 @@ const Plank: React.FC = () => {
             case 30:
                 return <MonthlyView />
             case 7:
-                return <WeaklyView />
+                return <WeeklyView />
             case 1:
                 return <DailyView />
         }

@@ -4,8 +4,7 @@ import '../../styles/monthly-view/monthly-view.scss';
 // Bootstrap
 import 'bootstrap';
 // Components
-import { MonthlyDay } from '../../allComponents';
-import { CalendarNavButtons } from '../../allComponents';
+import { MonthlyDay, CalendarNavButtons } from '../../allComponents';
 // Ostalo
 import { startOfMonth, endOfMonth, format, addDays, subDays, eachDayOfInterval, addMonths, subMonths } from 'date-fns';
 

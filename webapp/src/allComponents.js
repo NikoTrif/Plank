@@ -7,7 +7,7 @@ export { default as UserSettings } from './components/UserSettings';
 // Calendar
 export { default as DailyView } from './components/calendar/DailyView';
 export { default as MonthlyView } from './components/calendar/MonthlyView';
-export { default as WeaklyView } from './components/calendar/WeaklyView';
+export { default as WeeklyView } from './components/calendar/WeeklyView';
 
 // Micro Components
 export { default as MonthlyDay } from './components/calendar/micro-components/MonthlyDay';
