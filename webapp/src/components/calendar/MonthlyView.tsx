@@ -1,11 +1,13 @@
 import { useState } from 'react';
-import { startOfMonth, endOfMonth, format, addDays, subDays, eachDayOfInterval, addMonths, subMonths } from 'date-fns';
+// CSS
+import '../../styles/monthly-view/monthly-view.scss';
+// Bootstrap
+import 'bootstrap';
 // Components
 import { MonthlyDay } from '../../allComponents';
-import { ArrowLeft, ArrowRight } from 'react-bootstrap-icons';
-// CSS
-import 'bootstrap';
-import '../../styles/monthly-view/monthly-view.scss';
+import { CalendarNavButtons } from '../../allComponents';
+// Ostalo
+import { startOfMonth, endOfMonth, format, addDays, subDays, eachDayOfInterval, addMonths, subMonths } from 'date-fns';
 
 const MonthlyView: React.FC = () => {
     const [currentDate, setCureentDate] = useState(new Date);
@@ -54,11 +56,8 @@ const MonthlyView: React.FC = () => {
     return (
         <div className='month'>
             <h2 className='text-center'>{format(currentDate, 'MMMM yyyy')}</h2>
-            <div className='nav-btns'>
-                <button onClick={btnBckClick} className='arrow btn btn-primary'><ArrowLeft /></button>
-                <button onClick={btnTodayClick} className='btn btn-primary'>{"Today"}</button>
-                <button onClick={btnFwdClick} className='arrow btn btn-primary'><ArrowRight /></button>
-            </div>
+            <CalendarNavButtons btnBckClick={btnBckClick} btnFwdClick={btnFwdClick} btnTodayClick={btnTodayClick} />
+
             <div className='row row-cols-7'>
                 {weekDays.map((day, index) => <div className='col text-center weekDays' key={index + 100}>{day}</div>
                 )}
