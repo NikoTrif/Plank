@@ -1,0 +1,32 @@
+.month {
+    .nav-btns {
+        display: flex;
+        justify-content: space-between;
+        height: 35px;
+        margin: 15px;
+        
+        button {
+            border-radius: 10%;
+            vertical-align: middle;
+            line-height: 0%;
+        }
+
+        .arrow {
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            width: 45px;
+        }
+    }
+
+    .row-cols-7 {
+        .col {
+            flex: 0 0 auto;
+            width: 14.285%;
+        }
+
+        .weekDays {
+            border: 1px solid white;
+        }
+    }
+}

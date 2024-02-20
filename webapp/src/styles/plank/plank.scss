@@ -1,0 +1,36 @@
+nav{
+    padding: 10px !important;
+
+    .navbar-brand{
+        color: #fff;
+    }
+    .dropdown-toggle{
+        margin-right: 55px;
+    }
+}
+
+.view-buttons {
+    display: flex;
+    // position: absolute;
+    // top: 70px;
+    margin-top: 80px;
+    width: 100%;
+    justify-content: center;
+
+    button{
+        margin: 0 20px 0 20px;
+    }
+    :first-child{
+        margin-left: 0;
+    }
+    :last-child{
+        margin-right: 0;
+    }
+}
+
+.view {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
