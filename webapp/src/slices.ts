@@ -5,7 +5,6 @@ import {
     createSlice,
 } from "@reduxjs/toolkit";
 import { UserApi } from "./api";
-import { Type } from "react-bootstrap-icons";
 
 export interface UserState {
     id: string | undefined;
@@ -100,7 +99,7 @@ const rootReducer = combineReducers({
     darkMode: DarkModeSlice.reducer,
 });
 
-// Exports
+/** Exports **/
 // Actions
 export const { darkModeToggle } = DarkModeSlice.actions;
 

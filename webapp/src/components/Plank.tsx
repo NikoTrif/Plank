@@ -12,8 +12,6 @@ import { darkModeToggle, IDarkMode } from '../slices'
 //Types and interfaces
 type IView = 30 | 7 | 1;
 
-
-
 const Plank: React.FC = () => {
     const state = useSelector(state => state);
     const dispatch = useDispatch();

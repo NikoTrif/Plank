@@ -8,8 +8,6 @@ import 'bootstrap';
 import '../../styles/monthly-view/monthly-view.scss';
 
 const MonthlyView: React.FC = () => {
-
-
     const [currentDate, setCureentDate] = useState(new Date);
     const today = new Date();
     const weekDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];

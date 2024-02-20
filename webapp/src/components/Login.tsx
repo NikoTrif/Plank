@@ -1,8 +1,8 @@
+//CSS
 import '../styles/login/login.scss';
-// Bootstrap CSS
-import "bootstrap/dist/css/bootstrap.min.css";
-// Bootstrap Bundle JS
-import "bootstrap/dist/js/bootstrap.bundle.min";
+//Bootstrap CSS
+import "bootstrap";
+//Ostalo
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetctUserByLogin, UserState } from '../slices';
@@ -10,6 +10,7 @@ import { AppDispatch } from '../store';
 import { ReactElement, useEffect, useState } from 'react';
 import { Spinner } from 'react-bootstrap';
 
+// Types and interfaces
 interface IUserState {
     user: UserState
 }
