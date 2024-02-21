@@ -7,11 +7,12 @@ import 'bootstrap';
 import { MonthlyDay, CalendarNavButtons } from '../../allComponents';
 // Ostalo
 import { startOfMonth, endOfMonth, format, addDays, subDays, eachDayOfInterval, addMonths, subMonths } from 'date-fns';
+import { funcVariables } from '../../Variables';
 
 const MonthlyView: React.FC = () => {
     const [currentDate, setCureentDate] = useState(new Date);
     const today = new Date();
-    const weekDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    const weekDays = funcVariables.weekDays;
 
     const btnBckClick = () => {
         setCureentDate(subMonths(startOfMonth(currentDate), 1));
