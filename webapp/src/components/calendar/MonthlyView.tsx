@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 // CSS
 import '../../styles/monthly-view/monthly-view.scss';
 // Bootstrap
@@ -6,27 +6,31 @@ import 'bootstrap';
 // Components
 import { MonthlyDay, CalendarNavButtons } from '../../allComponents';
 // Ostalo
-import { startOfMonth, endOfMonth, format, addDays, subDays, eachDayOfInterval, addMonths, subMonths } from 'date-fns';
+import { startOfMonth, endOfMonth, format, addDays, subDays, eachDayOfInterval, addMonths, subMonths, DateValues } from 'date-fns';
 import { funcVariables } from '../../Variables';
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import { selectDate } from '../../slices';
+import { RootState } from '../../store';
 
 const MonthlyView: React.FC = () => {
-    const [currentDate, setCureentDate] = useState(new Date);
-    const today = new Date();
-    const weekDays = funcVariables.weekDays;
+    const dispatch = useDispatch();
+    const selectedDate = useSelector((state: any) => state.selectedDate);
+
+    const { weekDays, today } = funcVariables;
 
     const btnBckClick = () => {
-        setCureentDate(subMonths(startOfMonth(currentDate), 1));
+        dispatch(selectDate(subMonths(startOfMonth(selectedDate), 1)));
     }
     const btnTodayClick = () => {
-        setCureentDate(today);
+        dispatch(selectDate(today));
     }
     const btnFwdClick = () => {
-        setCureentDate(addMonths(startOfMonth(currentDate), 1));
+        dispatch(selectDate(addMonths(startOfMonth(selectedDate), 1)));
     }
 
 
     const calendarStartDate = () => {
-        let startDate = startOfMonth(currentDate);
+        let startDate = startOfMonth(selectedDate);
         while (startDate.getDay() !== 1) {
             startDate = subDays(startDate, 1);
         }
@@ -35,7 +39,7 @@ const MonthlyView: React.FC = () => {
     }
 
     const calendarEndDate = () => {
-        let endDate = endOfMonth(currentDate);
+        let endDate = endOfMonth(selectedDate);
 
         while (endDate.getDay() !== 0) {
             endDate = addDays(endDate, 1);
@@ -55,7 +59,7 @@ const MonthlyView: React.FC = () => {
 
     return (
         <div className='month'>
-            <h2 className='text-center'>{format(currentDate, 'MMMM yyyy')}</h2>
+            <h2 className='text-center'>{format(selectedDate, 'MMMM yyyy')}</h2>
             <CalendarNavButtons btnBckClick={btnBckClick} btnFwdClick={btnFwdClick} btnTodayClick={btnTodayClick} />
 
             <div className='row row-cols-7'>
@@ -63,7 +67,7 @@ const MonthlyView: React.FC = () => {
                 )}
                 {calendarDates().map((day, index) => {
                     return (
-                        <button className={currentDate.getMonth() !== day.getMonth() ? 'col btn btn-outline-secondary' : 'col btn btn-outline-primary'} key={index}> {/**col day */}
+                        <button className={selectedDate.getMonth() !== day.getMonth() ? 'col btn btn-outline-secondary' : 'col btn btn-outline-primary'} key={index}> {/**col day */}
                             <MonthlyDay day={format(day, 'd').toString()} />
                         </button>
                     );

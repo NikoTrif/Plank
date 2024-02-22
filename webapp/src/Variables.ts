@@ -5,4 +5,5 @@ export const variables =  {
 
 export const funcVariables = {
     weekDays: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    today: new Date(),
 }

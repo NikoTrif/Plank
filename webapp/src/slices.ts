@@ -19,7 +19,7 @@ export interface PayloadUserByLogin {
 }
 
 export interface IDarkMode {
-    darkMode: boolean
+    darkMode: boolean;
 }
 
 // Actions
@@ -81,7 +81,7 @@ const UserSlice = createSlice({
     },
 });
 
-export const DarkModeSlice = createSlice({
+const DarkModeSlice = createSlice({
     name: "darkMode",
     initialState: false,
     reducers: {
@@ -92,16 +92,28 @@ export const DarkModeSlice = createSlice({
     },
 });
 
+const SelectedDateSlice = createSlice({
+    name: "selectedDate",
+    initialState: new Date(),
+    reducers: {
+        selectDate: (state, action) => {
+            state = action.payload as Date;
+            return state;
+        },
+    },
+});
 
 // Combine Reducers
 const rootReducer = combineReducers({
     user: UserSlice.reducer,
     darkMode: DarkModeSlice.reducer,
+    selectedDate: SelectedDateSlice.reducer,
 });
 
 /** Exports **/
 // Actions
 export const { darkModeToggle } = DarkModeSlice.actions;
+export const { selectDate } = SelectedDateSlice.actions;
 
 // Reducer
 export default rootReducer;

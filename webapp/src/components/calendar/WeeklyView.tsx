@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, ReactNode } from 'react';
+import React, { FC, ReactElement, ReactNode, useEffect } from 'react';
 // CSS
 
 // Bootstrap
@@ -10,6 +10,8 @@ import 'bootstrap';
 import { funcVariables } from '../../Variables';
 import { CalendarNavButtons, WeeklyDay } from '../../allComponents';
 import * as fns from 'date-fns';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectDate } from '../../slices';
 
 // Interfaces and Types
 type Props = {}
@@ -17,29 +19,21 @@ type Props = {}
 
 const WeeklyView = (props: Props) => {
   // Variables
-  const weekDays = funcVariables.weekDays;
+  const { weekDays, today } = funcVariables;
+  const dispatch = useDispatch();
+  const selectedDate = useSelector((state: any) => state.selectedDate);
 
-  // const renderTableRow = () => {
-  //   let allRows = []
-  //   for (let i = 0; i < 24; i++) {
-  //     allRows.push(<tr key={i}>{renderTableCols(i)}</tr>)
-  //   }
-  //   return allRows
-  // }
+  const startOfWeek = fns.addDays(fns.startOfWeek(selectedDate), 1);
 
-  // const renderTableCols = (i: number) => {
-  //   let allCols = [];
-  //   for(let j = 0; j <=7; j++){
-  //     if(j===0){
-  //       allCols.push(<td className='weekly-time'>{`${i}:00`}</td>)
-  //     }
-  //     else{
-  //       allCols.push(<td><WeeklyDay /></td>)
-  //     }
-  //   }
+  const renderDates = (): string[] => {
+    let weekdates: string[] = [];
+    
+    for (let i = 0; i < 7; i++) {
+      weekdates.push(fns.format(fns.addDays(startOfWeek, i), 'EEE dd.MM.yyyy'));
+    }
 
-  //   return allCols;
-  // }
+    return weekdates;
+  }
 
   const renderTableRow = () => {
     let allRows = []
@@ -64,15 +58,27 @@ const WeeklyView = (props: Props) => {
     return allCols;
   }
 
+  const btnBckClick = () => {
+    dispatch(selectDate(fns.subWeeks(startOfWeek, 1)));
+  }
+
+  const btnTodayClick = () => {
+    dispatch(selectDate(today));
+  }
+
+  const btnFwdClick = () => {
+    dispatch(selectDate(fns.addWeeks(startOfWeek, 1)));
+  }
+
   return (
     <div className='weekly-view'>
-      <CalendarNavButtons btnBckClick={() => { }} btnFwdClick={() => { }} btnTodayClick={() => { }} />
+      <CalendarNavButtons btnBckClick={btnBckClick} btnFwdClick={btnFwdClick} btnTodayClick={btnTodayClick} />
 
       <table className='table'>
         <thead>
           <tr>
             <th></th>
-            {weekDays.map((day, index) => <th scope='col' key={index*100}>{day}</th>)}
+            {renderDates().map((day, index) => <th scope='col' key={index * 100}>{day}</th>)}
           </tr>
         </thead>
         <tbody>
