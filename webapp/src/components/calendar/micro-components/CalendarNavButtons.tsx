@@ -2,6 +2,9 @@ import React from 'react';
 // Bootstrap
 import 'bootstrap';
 import { ArrowLeft, ArrowRight } from 'react-bootstrap-icons';
+
+// CSS
+import '../../../styles/_micro-components.scss'
 // Ostalo
 
 type Props = {

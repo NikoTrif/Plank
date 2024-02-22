@@ -14,7 +14,7 @@ export { default as MonthlyDay } from './components/calendar/micro-components/Mo
 export { default as MonthlyDayTask } from './components/calendar/micro-components/MonthlyDayTask';
 export { default as CalendarNavButtons } from './components/calendar/micro-components/CalendarNavButtons';
 export { default as WeeklyDay } from './components/calendar/micro-components/WeeklyDay';
-export { default as WeeklyDayTask } from './components/calendar/micro-components/MonthlyDayTask';
+export { default as WeeklyDayTask } from './components/calendar/micro-components/WeeklyDayTask';
 
 // Themes
 export { Cyborg, Flatly } from './components/themes/all-themes';

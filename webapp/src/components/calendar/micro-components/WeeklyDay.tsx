@@ -1,11 +1,13 @@
 import React from 'react';
+import { WeeklyDayTask } from '../../../allComponents';
 
 type Props = {}
 
 const WeeklyDay = (props: Props) => {
   return (
     <div>
-        day
+      day
+      <WeeklyDayTask />
     </div>
   )
 }
