@@ -1,5 +1,6 @@
 import React, { FC, ReactElement, ReactNode, useEffect } from 'react';
 // CSS
+import '../../styles/weekly-view.scss';
 
 // Bootstrap
 import 'bootstrap';
@@ -25,15 +26,15 @@ const WeeklyView = (props: Props) => {
 
   const startOfWeek = fns.addDays(fns.startOfWeek(selectedDate), 1);
 
-  const renderDates = (): string[] => {
-    let weekdates: string[] = [];
+  const renderDates = (): string[][] => {
+    let weekdates: string[][] = [];
     
     for (let i = 0; i < 7; i++) {
-      weekdates.push(fns.format(fns.addDays(startOfWeek, i), 'EEE dd.MM.yyyy'));
+      weekdates.push(fns.format(fns.addDays(startOfWeek, i), 'EEE,dd.MM.yyyy').split(','));
     }
 
     return weekdates;
-  }
+  }  
 
   const renderTableRow = () => {
     let allRows = []
@@ -74,18 +75,20 @@ const WeeklyView = (props: Props) => {
     <div className='weekly-view'>
       <CalendarNavButtons btnBckClick={btnBckClick} btnFwdClick={btnFwdClick} btnTodayClick={btnTodayClick} />
 
-      <table className='table'>
-        <thead>
-          <tr>
-            <th></th>
-            {renderDates().map((day, index) => <th scope='col' key={index * 100}>{day}</th>)}
-          </tr>
-        </thead>
-        <tbody>
-          {renderTableRow()}
-        </tbody>
-      </table>
-    </div>
+      <div className='week-plan'>
+        <table className='table'>
+          <thead>
+            <tr>
+              <th></th>
+              {renderDates().map((day, index) => <th scope='col' key={index * 100}>{day[0]}<span className='weekdate'>{day[1]}</span></th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {renderTableRow()}
+          </tbody>
+        </table>
+            </div>
+      </div>
   )
 }
 
